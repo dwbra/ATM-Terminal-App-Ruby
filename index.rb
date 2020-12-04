@@ -1,8 +1,5 @@
 ## This method won't be used.
 ## Only exists to check that rspect is working correctly 
-def hello
-    return "hello world"
-end
 
 def welcome_and_input
     system("clear")
@@ -13,6 +10,15 @@ def welcome_and_input
     puts "3. Make a deposit"
     puts "4. Exit"
     input = gets.chomp.to_i
+    input_valid = Validators.validate_input(input)
+    if !input_valid
+             #print error message for invalid input
+            #re-print options
+            puts "Invalid input, please enter a number from 1-4"
+            puts "Press any key to continue"
+            gets 
+            welcome_and_input()
+        welcome_and_input()
     case input 
         when 1 
             #show balance
@@ -25,12 +31,6 @@ def welcome_and_input
             puts "Goodbye fucker"
             system("exit")
         else
-            #print error message for invalid input
-            #re-print options
-            puts "Invalid input, please enter a number from 1-4"
-            puts "Press any key to continue"
-            gets 
-            welcome_and_input()
     end
     end
 
