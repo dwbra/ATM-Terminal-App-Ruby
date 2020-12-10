@@ -80,7 +80,6 @@ end
 def make_deposit
     puts "How much would you like to deposit?"
     amount = gets.chomp
-
     valid = Validators.validate_positive_int(amount)
     if !valid
         puts "invalid amount, please enter a positive number"
@@ -101,6 +100,12 @@ def make_deposit
     # puts "Your bank balance is #{amount_after_deposit}."
     # end
 end
+
+# if ARGV.length > 0 
+#     if ARGV[0] == "-h" || ARGV[0] == "--help"
+#         puts "You asked for help"
+#     end
+# else 
 
 atm_view = AtmView.new
 welcome_and_input(atm_view)
