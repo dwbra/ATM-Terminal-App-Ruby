@@ -47,7 +47,7 @@ def make_withdrawl
     #get the amount
     amount = gets.chomp
     #validate the input
-    valid = Validators.validate_withdrawl(amount)
+    valid = Validators.validate_positive_int(amount)
     if !valid
         #print out error mesage
         puts "invalid amount, please enter a positive number"
@@ -79,16 +79,27 @@ end
 #deposit method
 def make_deposit
     puts "How much would you like to deposit?"
-    deposit = gets.chomp.to_i
-    bank_balance = 0
-    File.open("balance.txt").each do |file|
-        bank_balance = file.to_i
+    amount = gets.chomp
+
+    valid = Validators.validate_positive_int(amount)
+    if !valid
+        puts "invalid amount, please enter a positive number"
+        make_deposit()
     end
-    amount_after_deposit = bank_balance + deposit
-    File.open("balance.txt", "w") do |f|
-        f.write amount_after_deposit
-    puts "Your bank balance is #{amount_after_deposit}."
-    end
+    balance = get_balance().to_i
+    new_amount = (balance + amount.to_i).to_s
+    File.write("balance.txt", new_amount)
+    puts "Your bank balance is $#{new_amount}."
+    # deposit = gets.chomp.to_i
+    # bank_balance = 0
+    # File.open("balance.txt").each do |file|
+    #     bank_balance = file.to_i
+    # end
+    # amount_after_deposit = bank_balance + deposit
+    # File.open("balance.txt", "w") do |f|
+    #     f.write amount_after_deposit
+    # puts "Your bank balance is #{amount_after_deposit}."
+    # end
 end
 
 atm_view = AtmView.new
